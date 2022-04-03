@@ -1,11 +1,11 @@
 module twelve2thirtytwo_sext(
     LoadStore12Address,
-    LoadStoreAddress
+    LoadStore32Address
 );
 
 input [11:0] LoadStore12Address;
-output [31:0] LoadStoreAddress;
+output [31:0] LoadStore32Address;
 
-assign LoadStoreAddress = {{20{LoadStore12Address[11]}},LoadStore12Address};
+assign LoadStore32Address = {{20{LoadStore12Address[11]}},LoadStore12Address};
 
 endmodule
