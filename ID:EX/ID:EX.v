@@ -1,0 +1,4 @@
+module IDEX(
+    CLK,
+    
+)

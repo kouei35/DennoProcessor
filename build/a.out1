@@ -1,0 +1,12 @@
+**** module/scope: PC
+     Flip-Flops   : 32
+     Logic Gates  : 65
+     MUX[2]: 32 slices
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted
+**** TOTALS
+     Flip-Flops   : 32
+     Logic Gates  : 65
+     MUX[2]: 32 slices
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted

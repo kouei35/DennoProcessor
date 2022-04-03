@@ -1,0 +1,213 @@
+#! /opt/homebrew/Cellar/icarus-verilog/11.0/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/va_math.vpi";
+S_0x158604760 .scope module, "test_IFID" "test_IFID" 2 1;
+ .timescale 0 0;
+v0x6000012c8c60_0 .net "ADDR_OUT_ROM", 31 0, v0x6000012c85a0_0;  1 drivers
+v0x6000012c8cf0_0 .var "CLK", 0 0;
+v0x6000012c8d80_0 .var "CNTEN", 0 0;
+v0x6000012c8e10_0 .net "IFIDOUTInst", 31 0, v0x6000012c8360_0;  1 drivers
+v0x6000012c8ea0_0 .net "IFIDOUTPC", 31 0, v0x6000012c83f0_0;  1 drivers
+v0x6000012c8f30_0 .net "Inst", 31 0, v0x6000012c8510_0;  1 drivers
+v0x6000012c8fc0_0 .net "PCAdderOUT", 31 0, L_0x6000011c80a0;  1 drivers
+v0x6000012c9050_0 .net "PCIN", 31 0, v0x6000012c8b40_0;  1 drivers
+v0x6000012c90e0_0 .var "PCsel", 0 0;
+v0x6000012c9170_0 .var "RSTB", 0 0;
+S_0x1586048d0 .scope module, "IFID" "IFID" 2 18, 3 1 0, S_0x158604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "CLK";
+    .port_info 1 /INPUT 32 "InPC";
+    .port_info 2 /INPUT 32 "InInst";
+    .port_info 3 /OUTPUT 32 "PC";
+    .port_info 4 /OUTPUT 32 "Inst";
+v0x6000012c81b0_0 .net "CLK", 0 0, v0x6000012c8cf0_0;  1 drivers
+v0x6000012c8240_0 .net "InInst", 31 0, v0x6000012c8510_0;  alias, 1 drivers
+v0x6000012c82d0_0 .net "InPC", 31 0, v0x6000012c8b40_0;  alias, 1 drivers
+v0x6000012c8360_0 .var "Inst", 31 0;
+v0x6000012c83f0_0 .var "PC", 31 0;
+E_0x600002ecc0c0 .event posedge, v0x6000012c81b0_0;
+S_0x158605000 .scope module, "IMEM" "IMEM" 2 17, 4 1 0, S_0x158604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "ADDR_IN_ROM";
+    .port_info 1 /OUTPUT 32 "Inst";
+v0x6000012c8480_0 .net "ADDR_IN_ROM", 31 0, v0x6000012c85a0_0;  alias, 1 drivers
+v0x6000012c8510_0 .var "Inst", 31 0;
+E_0x600002ecc180 .event edge, v0x6000012c8480_0;
+S_0x158605170 .scope module, "PC" "PC" 2 15, 5 2 0, S_0x158604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "CLK";
+    .port_info 1 /INPUT 1 "RSTB";
+    .port_info 2 /INPUT 32 "PCIN";
+    .port_info 3 /INPUT 1 "CNTEN";
+    .port_info 4 /OUTPUT 32 "ADDR_OUT_ROM";
+v0x6000012c85a0_0 .var "ADDR_OUT_ROM", 31 0;
+v0x6000012c8630_0 .net "CLK", 0 0, v0x6000012c8cf0_0;  alias, 1 drivers
+v0x6000012c86c0_0 .net "CNTEN", 0 0, v0x6000012c8d80_0;  1 drivers
+v0x6000012c8750_0 .net "PCIN", 31 0, v0x6000012c8b40_0;  alias, 1 drivers
+v0x6000012c87e0_0 .net "RSTB", 0 0, v0x6000012c9170_0;  1 drivers
+S_0x1586054e0 .scope module, "PCAdder" "PCAdder" 2 16, 6 1 0, S_0x158604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "PC";
+    .port_info 1 /OUTPUT 32 "PCIN";
+v0x6000012c8870_0 .net "PC", 31 0, v0x6000012c85a0_0;  alias, 1 drivers
+v0x6000012c8900_0 .net "PCIN", 31 0, L_0x6000011c80a0;  alias, 1 drivers
+L_0x160078010 .functor BUFT 1, C4<00000000000000000000000000000100>, C4<0>, C4<0>, C4<0>;
+v0x6000012c8990_0 .net/2u *"_ivl_0", 31 0, L_0x160078010;  1 drivers
+L_0x6000011c80a0 .arith/sum 32, v0x6000012c85a0_0, L_0x160078010;
+S_0x158605650 .scope module, "PCmux" "PCmux" 2 14, 7 1 0, S_0x158604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "PC";
+    .port_info 1 /INPUT 32 "JumporBranch";
+    .port_info 2 /INPUT 1 "PCsel";
+    .port_info 3 /OUTPUT 32 "PCIN";
+o0x160040490 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x6000012c8a20_0 .net "JumporBranch", 31 0, o0x160040490;  0 drivers
+v0x6000012c8ab0_0 .net "PC", 31 0, L_0x6000011c80a0;  alias, 1 drivers
+v0x6000012c8b40_0 .var "PCIN", 31 0;
+v0x6000012c8bd0_0 .net "PCsel", 0 0, v0x6000012c90e0_0;  1 drivers
+E_0x600002ecc210 .event edge, v0x6000012c8bd0_0, v0x6000012c8900_0, v0x6000012c8a20_0;
+    .scope S_0x158605650;
+T_0 ;
+    %wait E_0x600002ecc210;
+    %load/vec4 v0x6000012c8bd0_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 1;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 1;
+    %cmp/u;
+    %jmp/1 T_0.1, 6;
+    %load/vec4 v0x6000012c8ab0_0;
+    %assign/vec4 v0x6000012c8b40_0, 0;
+    %jmp T_0.3;
+T_0.0 ;
+    %load/vec4 v0x6000012c8ab0_0;
+    %assign/vec4 v0x6000012c8b40_0, 0;
+    %jmp T_0.3;
+T_0.1 ;
+    %load/vec4 v0x6000012c8a20_0;
+    %assign/vec4 v0x6000012c8b40_0, 0;
+    %jmp T_0.3;
+T_0.3 ;
+    %pop/vec4 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x158605170;
+T_1 ;
+    %wait E_0x600002ecc0c0;
+    %load/vec4 v0x6000012c87e0_0;
+    %cmpi/e 0, 0, 1;
+    %jmp/0xz  T_1.0, 4;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x6000012c85a0_0, 0;
+    %jmp T_1.1;
+T_1.0 ;
+    %load/vec4 v0x6000012c8750_0;
+    %assign/vec4 v0x6000012c85a0_0, 0;
+T_1.1 ;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x158605000;
+T_2 ;
+    %wait E_0x600002ecc180;
+    %load/vec4 v0x6000012c8480_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/u;
+    %jmp/1 T_2.0, 6;
+    %dup/vec4;
+    %pushi/vec4 4, 0, 32;
+    %cmp/u;
+    %jmp/1 T_2.1, 6;
+    %dup/vec4;
+    %pushi/vec4 8, 0, 32;
+    %cmp/u;
+    %jmp/1 T_2.2, 6;
+    %dup/vec4;
+    %pushi/vec4 12, 0, 32;
+    %cmp/u;
+    %jmp/1 T_2.3, 6;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x6000012c8510_0, 0;
+    %jmp T_2.5;
+T_2.0 ;
+    %pushi/vec4 20, 0, 32;
+    %assign/vec4 v0x6000012c8510_0, 0;
+    %jmp T_2.5;
+T_2.1 ;
+    %pushi/vec4 16, 0, 32;
+    %assign/vec4 v0x6000012c8510_0, 0;
+    %jmp T_2.5;
+T_2.2 ;
+    %pushi/vec4 17, 0, 32;
+    %assign/vec4 v0x6000012c8510_0, 0;
+    %jmp T_2.5;
+T_2.3 ;
+    %pushi/vec4 256, 0, 32;
+    %assign/vec4 v0x6000012c8510_0, 0;
+    %jmp T_2.5;
+T_2.5 ;
+    %pop/vec4 1;
+    %jmp T_2;
+    .thread T_2, $push;
+    .scope S_0x1586048d0;
+T_3 ;
+    %wait E_0x600002ecc0c0;
+    %load/vec4 v0x6000012c82d0_0;
+    %assign/vec4 v0x6000012c83f0_0, 0;
+    %load/vec4 v0x6000012c8240_0;
+    %assign/vec4 v0x6000012c8360_0, 0;
+    %jmp T_3;
+    .thread T_3;
+    .scope S_0x158604760;
+T_4 ;
+    %delay 10, 0;
+    %load/vec4 v0x6000012c8cf0_0;
+    %inv;
+    %assign/vec4 v0x6000012c8cf0_0, 0;
+    %jmp T_4;
+    .thread T_4;
+    .scope S_0x158604760;
+T_5 ;
+    %delay 0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x6000012c8cf0_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x6000012c8d80_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x6000012c90e0_0, 0;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x6000012c9170_0, 0;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x6000012c9170_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x6000012c8d80_0, 0;
+    %delay 500, 0;
+    %vpi_call 2 31 "$finish" {0 0 0};
+    %end;
+    .thread T_5;
+    .scope S_0x158604760;
+T_6 ;
+    %vpi_call 2 35 "$dumpfile", "PC_IFID.vcd" {0 0 0};
+    %vpi_call 2 36 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x158604760 {0 0 0};
+    %end;
+    .thread T_6;
+# The file index is used to find the file name in the following table.
+:file_names 8;
+    "N/A";
+    "<interactive>";
+    "../IF:ID_test.v";
+    "../IF:ID.v";
+    "../IMEM.v";
+    "PC.v";
+    "PCAdder.v";
+    "PCmux.v";

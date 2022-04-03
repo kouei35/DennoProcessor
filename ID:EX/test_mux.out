@@ -1,0 +1,101 @@
+#! /opt/homebrew/Cellar/icarus-verilog/11.0/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/11.0/lib/ivl/va_math.vpi";
+S_0x13a604760 .scope module, "test_mux_sext" "test_mux_sext" 2 1;
+ .timescale 0 0;
+v0x600001b68630_0 .var "Load12Address", 11 0;
+v0x600001b686c0_0 .net "LoadStore12Address", 11 0, v0x600001b68240_0;  1 drivers
+v0x600001b68750_0 .net "LoadStoreAddress", 31 0, L_0x6000018681e0;  1 drivers
+v0x600001b687e0_0 .var "LoadStoresel", 0 0;
+v0x600001b68870_0 .var "Store12Address", 11 0;
+S_0x13a6048d0 .scope module, "LoadStoremux" "LoadStoremux" 2 10, 3 1 0, S_0x13a604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 12 "Load12Address";
+    .port_info 1 /INPUT 12 "Store12Address";
+    .port_info 2 /INPUT 1 "LoadStoresel";
+    .port_info 3 /OUTPUT 12 "LoadStore12Address";
+v0x600001b681b0_0 .net "Load12Address", 11 0, v0x600001b68630_0;  1 drivers
+v0x600001b68240_0 .var "LoadStore12Address", 11 0;
+v0x600001b682d0_0 .net "LoadStoresel", 0 0, v0x600001b687e0_0;  1 drivers
+v0x600001b68360_0 .net "Store12Address", 11 0, v0x600001b68870_0;  1 drivers
+E_0x600002769c80 .event edge, v0x600001b682d0_0, v0x600001b681b0_0, v0x600001b68360_0;
+S_0x13a604e20 .scope module, "twelve2thirtytwo_mux" "twelve2thirtytwo_sext" 2 9, 4 1 0, S_0x13a604760;
+ .timescale 0 0;
+    .port_info 0 /INPUT 12 "LoadStore12Address";
+    .port_info 1 /OUTPUT 32 "LoadStoreAddress";
+v0x600001b683f0_0 .net "LoadStore12Address", 11 0, v0x600001b68240_0;  alias, 1 drivers
+v0x600001b68480_0 .net "LoadStoreAddress", 31 0, L_0x6000018681e0;  alias, 1 drivers
+v0x600001b68510_0 .net *"_ivl_1", 0 0, L_0x6000018680a0;  1 drivers
+v0x600001b685a0_0 .net *"_ivl_2", 19 0, L_0x600001868140;  1 drivers
+L_0x6000018680a0 .part v0x600001b68240_0, 11, 1;
+LS_0x600001868140_0_0 .concat [ 1 1 1 1], L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0;
+LS_0x600001868140_0_4 .concat [ 1 1 1 1], L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0;
+LS_0x600001868140_0_8 .concat [ 1 1 1 1], L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0;
+LS_0x600001868140_0_12 .concat [ 1 1 1 1], L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0;
+LS_0x600001868140_0_16 .concat [ 1 1 1 1], L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0, L_0x6000018680a0;
+LS_0x600001868140_1_0 .concat [ 4 4 4 4], LS_0x600001868140_0_0, LS_0x600001868140_0_4, LS_0x600001868140_0_8, LS_0x600001868140_0_12;
+LS_0x600001868140_1_4 .concat [ 4 0 0 0], LS_0x600001868140_0_16;
+L_0x600001868140 .concat [ 16 4 0 0], LS_0x600001868140_1_0, LS_0x600001868140_1_4;
+L_0x6000018681e0 .concat [ 12 20 0 0], v0x600001b68240_0, L_0x600001868140;
+    .scope S_0x13a6048d0;
+T_0 ;
+    %wait E_0x600002769c80;
+    %load/vec4 v0x600001b682d0_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 1;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 1;
+    %cmp/u;
+    %jmp/1 T_0.1, 6;
+    %jmp T_0.2;
+T_0.0 ;
+    %load/vec4 v0x600001b681b0_0;
+    %assign/vec4 v0x600001b68240_0, 0;
+    %jmp T_0.2;
+T_0.1 ;
+    %load/vec4 v0x600001b68360_0;
+    %assign/vec4 v0x600001b68240_0, 0;
+    %jmp T_0.2;
+T_0.2 ;
+    %pop/vec4 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x13a604760;
+T_1 ;
+    %delay 0, 0;
+    %pushi/vec4 33, 0, 12;
+    %assign/vec4 v0x600001b68630_0, 0;
+    %pushi/vec4 3184, 0, 12;
+    %assign/vec4 v0x600001b68870_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x600001b687e0_0, 0;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x600001b687e0_0, 0;
+    %delay 10, 0;
+    %pushi/vec4 9, 0, 12;
+    %assign/vec4 v0x600001b68630_0, 0;
+    %vpi_call 2 18 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x13a604760;
+T_2 ;
+    %vpi_call 2 22 "$dumpfile", "mux_sext.vcd" {0 0 0};
+    %vpi_call 2 23 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x13a604760 {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "test_mux_sext.v";
+    "LoadStoremux.v";
+    "twelve2thirtytwo_sext.v";
