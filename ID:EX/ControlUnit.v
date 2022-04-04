@@ -180,6 +180,13 @@ casez({Opecode,ALUOp,funct})
         LoadStoremuxsel <= 1'b1;
         mux2sel <= 1'b0;
         end
+    default:    begin
+        Dmem1ALUOUT <= 1'b0; //ADD
+        DmemREB <= 1'b1;
+        DmemWEB <= 1'b1;
+        ALUControl <= 4'b0010; ALUSourceA <= 1'b1; ALUSourceB <= 3'b000;
+        LoadStoremuxsel <= 1'b0;
+        mux2sel <= 1'b0;
 endcase
 end
 endmodule

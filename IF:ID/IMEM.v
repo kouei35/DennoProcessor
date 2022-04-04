@@ -3,7 +3,7 @@ module IMEM(
     Inst
 );
 
-input wire [31:0] ADDR_IN_ROM;
+input [31:0] ADDR_IN_ROM;
 output reg [31:0] Inst;
 
 always @* begin
