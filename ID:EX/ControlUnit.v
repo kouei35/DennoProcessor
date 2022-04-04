@@ -1,5 +1,4 @@
 module ControlUnit(
-    CLK,
     Opecode,
     ALUOp,
     funct,
@@ -12,7 +11,6 @@ module ControlUnit(
     LoadStoremuxsel,
     mux2sel
     );
-input CLK;
 input [6:0] Opecode;
 input [2:0] ALUOp;
 input [6:0] funct;
@@ -27,7 +25,7 @@ output reg mux2sel;
 
 //ALUControl�Ɩ{���W���[���̗������ۑ�B
 //�����ЂƂɂ́A����M���̔����̂��߂�opecode,aluop,funct�̂R�S�Ă��K�v���B
-always @(posedge CLK) begin
+always @* begin
 casez({Opecode,ALUOp,funct})
     17'b0000000_000_0110011: begin
         Dmem1ALUOUT <= 1'b0; //ADD
@@ -36,6 +34,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0010; ALUSourceA <= 1'b1; ALUSourceB <= 3'b000;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+    end
     17'b0100000_000_0110111: begin
         Dmem1ALUOUT <= 1'b0; //SUB
         DmemREB <= 1'b1;
@@ -181,12 +180,13 @@ casez({Opecode,ALUOp,funct})
         mux2sel <= 1'b0;
         end
     default:    begin
-        Dmem1ALUOUT <= 1'b0; //ADD
+        Dmem1ALUOUT <= 1'b0;
         DmemREB <= 1'b1;
         DmemWEB <= 1'b1;
         ALUControl <= 4'b0010; ALUSourceA <= 1'b1; ALUSourceB <= 3'b000;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+    end
 endcase
-end
+    end
 endmodule

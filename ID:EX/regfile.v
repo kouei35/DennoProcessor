@@ -9,12 +9,12 @@ module regfile(
     rs2_value
 );
 
-    input wire [4:0] rs1;
-    input wire [4:0] rs2;
-    input wire [4:0] rd;
-    input wire [31:0] indata;
-    input wire CLK;
-    input wire RegWrite;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [4:0] rd;
+    input [31:0] indata;
+    input CLK;
+    input RegWrite;
     output wire [31:0] rs1_value;
     output wire [31:0] rs2_value;
 

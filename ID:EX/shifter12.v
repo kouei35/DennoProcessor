@@ -3,9 +3,9 @@ module shifter12(
     auipcOrlui
 );
 
-input [11:0] InstUpper20ext;
+input [31:0] InstUpper20ext;
 output wire [31:0] auipcOrlui;
 
-assign auipcOrlui = InstUpper20ext >> 12;
+assign auipcOrlui = InstUpper20ext << 20;
 
 endmodule

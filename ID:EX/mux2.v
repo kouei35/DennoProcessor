@@ -7,12 +7,14 @@ module mux2(
 
 input [31:0] LoadStore32Address;
 input [31:0] jal32;
+input mux2sel;
 output reg [31:0] LoadStoreOrjal;
 
 always @* begin
     case(mux2sel)
     1'b0:   LoadStoreOrjal <= LoadStore32Address;
     1'b1:   LoadStoreOrjal <= jal32; 
+    endcase
 end
 
 endmodule

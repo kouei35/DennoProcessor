@@ -1,4 +1,4 @@
-module twelve2thirtytwo_sext(
+module twelve2thirtytwosext(
     LoadStore12Address,
     LoadStore32Address
 );
