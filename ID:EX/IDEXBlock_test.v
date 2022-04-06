@@ -22,8 +22,8 @@ wire DmemWEB;
 
 /*ALU*/
 wire [3:0] ALUControl;
-wire [1:0] ALUSourceA;
-wire [2:0] ALUSourceB;
+wire ALUSourceA;
+wire [1:0] ALUSourceB;
 
 /*IDEX mux*/
 wire LoadStoremuxsel;
@@ -49,6 +49,8 @@ wire [31:0] InauipcOrlui;
 wire [31:0] PC;
 wire [31:0] LoadStoreOrjalAddress;
 wire [31:0] auipcOrlui;
+
+wire [31:0] InLoadStore32Address;
 
 IDEXBlock IDEXBlock(.CLK(CLK),.InPC(InPC),.Inst(Inst),.Dmem1ALUOUT(Dmem1ALUOUT),.DmemREB(DmemREB),.DmemWEB(DmemWEB),.ALUControl(ALUControl),.ALUSourceA(ALUSourceA),.ALUSourceB(ALUSourceB),.LoadStoreOrjalAddress(LoadStoreOrjalAddress),.auipcOrlui(auipcOrlui),.LoadStore32Address(LoadStore32Address),.PC(PC),.RegWrite(RegWrite));
 IFIDBlock IFIDBlock(.CLK(CLK),.RSTB(RSTB),.CNTEN(CNTEN),.PCsel(PCsel),.JumporBranch(JumporBranch),.IFIDOUTInst(Inst),.IFIDOUTPC(InPC));
