@@ -22,7 +22,7 @@ wire DmemWEB;
 
 /*ALU*/
 wire [3:0] ALUControl;
-wire ALUSourceA;
+wire [1:0] ALUSourceA;
 wire [2:0] ALUSourceB;
 
 /*IDEX mux*/

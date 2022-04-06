@@ -22,7 +22,7 @@ wire DmemWEB;
 
 /*ALU*/
 wire [3:0] ALUControl;
-wire ALUSourceA;
+wire [1:0] ALUSourceA;
 wire [2:0] ALUSourceB;
 
 /*IDEX mux*/
@@ -60,7 +60,7 @@ shifter1 shifter1(.LoadStoreOrjal(LoadStoreOrjal),.LoadStoreOrjalAddress(InLoadS
 shifter12 shifter12(.InstUpper20ext(InstUpper20ext),.auipcOrlui(InauipcOrlui));
 IDEX IDEX(.CLK(CLK),.InPC(InPC),.Inrs1val(Inrs1_value),.Inrs2val(Inrs2_value),.InLoadStoreOrjalAddress(InLoadStoreOrjalAddress),.InauipcOrlui(InauipcOrlui),.PC(PC),.rs1val(rs1_value),.rs2val(rs2_value),.LoadStoreOrjalAddress(LoadStoreOrjalAddress),.auipcOrlui(auipcOrlui));
 
-IFIDBlock IFIDBlock(.CLK(CLK),.RSTB(RSTB),.CNTEN(CNTEN),.PCsel(PCsel),.JumporBranch(JumporBranch),.IFIDOUTInst(Inst),.IFIDOUTPC(InPC));
+IFIDBlock IFIDBlock(.CLK(CLK),.RSTB(RSTB),.CNTEN(CNTEN),.PCsel(PCsel),.JumporBranch(JumporBranch),.IFIDOUTInst(Inst),.IFIDOUTPC(InPC),.ALUSourceA(ALUSourceA),.ALUSourceB(ALUSourceB));
 
 always begin
     #10 CLK <= ~CLK;

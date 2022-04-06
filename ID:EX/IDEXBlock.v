@@ -26,7 +26,7 @@ output wire DmemWEB;
 
 /*ALU*/
 output wire [3:0] ALUControl;
-output wire ALUSourceA;
+output wire [1:0] ALUSourceA;
 output wire [2:0] ALUSourceB;
 
 output wire [31:0] LoadStoreOrjalAddress;
