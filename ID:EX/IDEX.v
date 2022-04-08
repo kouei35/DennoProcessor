@@ -15,7 +15,11 @@ module IDEX(
     auipcOrlui,
     ALUSourceA,
     ALUSourceB,
-    LoadStore32Address
+    LoadStore32Address,
+    InIDEXrs1,
+    InIDEXrs2,
+    IDEXrs1,
+    IDEXrs2
 );
 
 input CLK;
@@ -27,6 +31,10 @@ input [31:0] InauipcOrlui;
 input [1:0] InALUSourceA;
 input [2:0] InALUSourceB;
 input [31:0] InLoadStore32Address;
+input [4:0] InIDEXrs1;
+input [4:0] InIDEXrs2;
+output reg [4:0] IDEXrs1;
+output reg [4:0] IDEXrs2;
 output reg [31:0] PC;
 output reg [31:0] rs1val;
 output reg [31:0] rs2val;
@@ -45,6 +53,8 @@ always @(posedge CLK) begin
     ALUSourceA <= InALUSourceA;
     ALUSourceB <= InALUSourceB;
     LoadStore32Address <= InLoadStore32Address;
+    IDEXrs1 <= InIDEXrs1;
+    IDEXrs2 <= InIDEXrs2;
 end
 
 endmodule
