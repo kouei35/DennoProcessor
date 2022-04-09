@@ -49,10 +49,23 @@ wire [31:0] InauipcOrlui;
 wire [31:0] PC;
 wire [31:0] LoadStoreOrjalAddress;
 wire [31:0] auipcOrlui;
-
+wire IDEXregWrite;
 wire [31:0] InLoadStore32Address;
 
-IDEXBlock IDEXBlock(.CLK(CLK),.InPC(InPC),.Inst(Inst),.Dmem1ALUOUT(Dmem1ALUOUT),.DmemREB(DmemREB),.DmemWEB(DmemWEB),.ALUControl(ALUControl),.ALUSourceA(ALUSourceA),.ALUSourceB(ALUSourceB),.LoadStoreOrjalAddress(LoadStoreOrjalAddress),.auipcOrlui(auipcOrlui),.LoadStore32Address(LoadStore32Address),.PC(PC),.RegWrite(RegWrite));
+IDEXBlock IDEXBlock(.CLK(CLK),
+                    .InPC(InPC),
+                    .Inst(Inst),
+                    .Dmem1ALUOUT(Dmem1ALUOUT),
+                    .DmemREB(DmemREB),
+                    .DmemWEB(DmemWEB),
+                    .ALUControl(ALUControl),
+                    .ALUSourceA(ALUSourceA),
+                    .ALUSourceB(ALUSourceB),
+                    .LoadStoreOrjalAddress(LoadStoreOrjalAddress),
+                    .auipcOrlui(auipcOrlui),
+                    .LoadStore32Address(LoadStore32Address),
+                    .PC(PC),
+                    .IDEXregWrite(IDEXregWrite));
 IFIDBlock IFIDBlock(.CLK(CLK),.RSTB(RSTB),.CNTEN(CNTEN),.PCsel(PCsel),.JumporBranch(JumporBranch),.IFIDOUTInst(Inst),.IFIDOUTPC(InPC));
 
 always begin

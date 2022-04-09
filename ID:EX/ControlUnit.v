@@ -9,7 +9,8 @@ module ControlUnit(
     ALUSourceA,
     ALUSourceB,
     LoadStoremuxsel,
-    mux2sel
+    mux2sel,
+    regWrite
     );
 input [6:0] Opecode;
 input [2:0] ALUOp;
@@ -22,6 +23,7 @@ output reg ALUSourceA;
 output reg [1:0] ALUSourceB;
 output reg LoadStoremuxsel;
 output reg mux2sel;
+output reg regWrite;
 
 //ALUControl�Ɩ{���W���[���̗������ۑ�B
 //�����ЂƂɂ́A����M���̔����̂��߂�opecode,aluop,funct�̂R�S�Ă��K�v���B
@@ -34,6 +36,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0010; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
     end
     17'b0100000_000_0110111: begin
         Dmem1ALUOUT <= 1'b0; //SUB
@@ -42,6 +45,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0110; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b???????_000_0010011: begin
         Dmem1ALUOUT <= 1'b0; //ADDI
@@ -50,6 +54,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0010; ALUSourceA <= 1'b0; ALUSourceB <= 2'b10;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_111_0110011: begin
         Dmem1ALUOUT <= 1'b0; //AND
@@ -58,6 +63,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0000; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b???????_111_0010011: begin
         Dmem1ALUOUT <= 1'b0; //ANDI
@@ -66,6 +72,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0000; ALUSourceA <= 1'b0; ALUSourceB <= 2'b10;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_010_0110011: begin
         Dmem1ALUOUT <= 1'b0;  //SLT
@@ -74,6 +81,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0111; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b???????_010_0010011: begin
         Dmem1ALUOUT <= 1'b0;  //SLTI
@@ -82,6 +90,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0111; ALUSourceA <= 1'b0; ALUSourceB <= 2'b10;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_100_0110011: begin
         Dmem1ALUOUT <= 1'b0; //XOR
@@ -90,6 +99,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0100; ALUSourceA <= 1'b0;  ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b???????_100_0010011: begin
         Dmem1ALUOUT <= 1'b0;  //XORI
@@ -98,6 +108,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0100; ALUSourceA <= 1'b0; ALUSourceB <= 2'b10;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_110_0110011: begin
         Dmem1ALUOUT <= 1'b0;   //OR
@@ -106,6 +117,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0001; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_001_0110011: begin
         Dmem1ALUOUT <= 1'b0;   //SLL
@@ -114,6 +126,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0101; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_001_0010011: begin
         Dmem1ALUOUT <= 1'b0;   //SLLI
@@ -122,6 +135,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0101; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_101_0110011: begin
         Dmem1ALUOUT <= 1'b0;    //SRL
@@ -130,6 +144,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b1000; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0000000_001_0110011: begin
         Dmem1ALUOUT <= 1'b0;    //SRLI
@@ -138,6 +153,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b1000; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0100000_101_0110011: begin
         Dmem1ALUOUT <= 1'b0;    //SRA
@@ -146,6 +162,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b1001; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b0100000_101_0010011: begin
         Dmem1ALUOUT <= 1'b0;    //SRAI
@@ -154,6 +171,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b1001; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end     
     17'b???????_110_0010011: begin
         Dmem1ALUOUT <= 1'b0;  //ORI
@@ -162,6 +180,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0001; ALUSourceA <= 1'b0; ALUSourceB <= 2'b10;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b???????_010_0000011: begin
         Dmem1ALUOUT <= 1'b1;    //LW
@@ -170,6 +189,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0010; ALUSourceA <= 1'b0; ALUSourceB <= 2'b11;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
         end
     17'b???????_010_0100011: begin
         Dmem1ALUOUT <= 1'b1;     //SW
@@ -178,6 +198,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0010; ALUSourceA <= 1'b0; ALUSourceB <= 2'b11;
         LoadStoremuxsel <= 1'b1;
         mux2sel <= 1'b0;
+        regWrite <= 1'b0;
         end
     default:    begin
         Dmem1ALUOUT <= 1'b0;
@@ -186,6 +207,7 @@ casez({Opecode,ALUOp,funct})
         ALUControl <= 4'b0010; ALUSourceA <= 1'b0; ALUSourceB <= 2'b00;
         LoadStoremuxsel <= 1'b0;
         mux2sel <= 1'b0;
+        regWrite <= 1'b1;
     end
 endcase
     end

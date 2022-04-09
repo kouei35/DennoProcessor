@@ -1,15 +1,15 @@
-module FowardingAdjustUnit1(
+module ForwardingAdjustUnit1(
     ALUSourceA,
-    FowardingE1,
+    ForwardingE1,
     rs1muxsel
 );
 
 input ALUSourceA;
-input FowardingE1;
+input ForwardingE1;
 output reg [1:0] rs1muxsel;
 
 always @* begin
-    if(FowardingE1) begin
+    if(ForwardingE1) begin
         rs1muxsel <= 2'b01;
     end
     else begin
